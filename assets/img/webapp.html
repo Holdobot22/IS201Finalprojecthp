@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Guess the Star Wars Astromech Droid</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0b0c10;
+      color:gold;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: none;
+      width: 250px;
+      text-align: center;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      background-color: gold;
+      color: black;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: goldenrod;
+      color: #0b0c10;
+    }
+
+    #message {
+      margin-top: 30px;
+      font-size: 1.2rem;
+    }
+
+    #gifContainer {
+      margin-top: 20px;
+    }
+
+    .reactionGif {
+      display: none;
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-top: 15px;
+    }
+
+    #playAgainBtn {
+      display: none;
+      margin-top: 25px;
+      background-color: gold;
+    }
+    #playAgainBtn:hover {
+      background-color: goldenrod;
+      color: #0b0c10;
+    }
+  </style>
+</head>
+<body>
+  <h1>Guess the Star Wars Astromech Droid</h1>
+  <br>
+  <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+    <div class="container px-4 px-lg-5">
+        <!-- <a class="navbar-brand" href="index.html">Home</a> -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+     
+            <i class="fas fa-bars"></i>
+            <a href="../index.html">Return to Resume Page</a>
+        </button>
+</nav>
+<br>
+  <br>
+  <input type="text" id="droidInput" placeholder="Enter a droid name">
+  <button onclick="checkDroid()">Submit</button>
+
+  <div id="message"></div>
+
+  <div id="gifContainer">
+    <img 
+      id="nopeGif" 
+      class="reactionGif"
+      src="assets/img/star-wars-r2d2.gif" 
+      alt="Nope!"
+    >
+    <img 
+      id="correctGif" 
+      class="reactionGif"
+      src="assets/img/Happy r2.gif" 
+      alt="R2-D2 celebrates!"
+    >
+  </div>
+
+  <button id="playAgainBtn" onclick="resetGame()">Try Again</button>
+
+  <script>
+    const correctDroids = ["R5-A2", "R4-M9", "R4-T8"];
+    const r2Sound = document.getElementById("r2Sound");
+    const messageDiv = document.getElementById("message");
+    const nopeGif = document.getElementById("nopeGif");
+    const correctGif = document.getElementById("correctGif");
+    const playAgainBtn = document.getElementById("playAgainBtn");
+
+    function checkDroid() {
+      const input = document.getElementById("droidInput").value.trim().toUpperCase();
+
+      console.log("User entered:", input);
+
+      if (correctDroids.includes(input)) {
+        messageDiv.textContent = "Correct!";
+        messageDiv.style.color = "#00ff00";
+        nopeGif.style.display = "none";
+        correctGif.style.display = "block";
+        r2Sound.currentTime = 0;
+        r2Sound.play();
+      } else {
+        messageDiv.textContent = "Nope!";
+        messageDiv.style.color = "#ff5555";
+        correctGif.style.display = "none";
+        nopeGif.style.display = "block";
+      }
+
+      // Show the "Play Again" button
+      playAgainBtn.style.display = "inline-block";
+    }
+
+    function resetGame() {
+      document.getElementById("droidInput").value = "";
+      messageDiv.textContent = "";
+      nopeGif.style.display = "none";
+      correctGif.style.display = "none";
+      playAgainBtn.style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
